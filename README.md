@@ -63,6 +63,9 @@ The project is organized around practical validation scenarios:
 
 Each completed scenario includes its objective, implementation, test procedure, observed results, and supporting evidence.
 
+![Architecture-and-flows](evidence/Architecture-and-Flows.png)
+
+
 ## Evidence
 
 Validation artifacts are maintained in the `evidence/` directory.
