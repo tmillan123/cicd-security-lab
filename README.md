@@ -49,7 +49,9 @@ Kubernetes Service (AKS).
 
 ## Architecture
 
-The laboratory architecture and component interactions are documented in the `Architecture` directory.
+The laboratory architecture and component interactions are documented in the `docs` directory.
+
+![Architecture-and-flows](evidence/Architecture-and-Flows.png)
 
 ## Security Validation Scenarios
 
@@ -62,8 +64,6 @@ The project is organized around practical validation scenarios:
 - Security event investigation using centralized telemetry
 
 Each completed scenario includes its objective, implementation, test procedure, observed results, and supporting evidence.
-
-![Architecture-and-flows](evidence/Architecture-and-Flows.png)
 
 
 ## Evidence
