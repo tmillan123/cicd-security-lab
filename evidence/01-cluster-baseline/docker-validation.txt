@@ -1,0 +1,3 @@
+CONTAINER ID   IMAGE                                     COMMAND                  CREATED        STATUS                 PORTS                       NAMES
+5b30074eeea7   ghcr.io/open-webui/open-webui:main-slim   "bash start.sh"          3 weeks ago    Up 8 hours (healthy)   127.0.0.1:3000->8080/tcp    open-webui
+642d2bb47f69   kindest/node:v1.36.1                      "/usr/local/bin/entr…"   3 months ago   Up 4 hours             127.0.0.1:41531->6443/tcp   laboratorio-control-plane

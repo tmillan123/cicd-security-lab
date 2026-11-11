@@ -3,11 +3,16 @@
 
 ## Overview
 
-This project demonstrates hands-on security engineering practices for containerized workloads in a Kubernetes environment.
+This laboratory uses an Ubuntu Linux virtual machine, Docker, a local Kubernetes cluster (kind), Helm, Python, and cloud-native security tools.
 
-The objective is to implement, validate, and document security capabilities across deployment automation, runtime threat detection, workload hardening, and security observability.
 
-The laboratory uses an Ubuntu Linux virtual machine, Docker, a local Kubernetes cluster (kind), Helm, Python, and cloud-native security tools.
+**Deployment scope:** 
+This laboratory implements cloud-native security
+engineering practices in a local Kubernetes environment using kind.
+Although no public cloud infrastructure is provisioned, the project
+demonstrates Kubernetes workload security capabilities and deployment
+patterns applicable to enterprise cloud environments such as Azure
+Kubernetes Service (AKS).
 
 **Focus areas:**
 
