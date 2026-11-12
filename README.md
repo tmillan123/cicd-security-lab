@@ -3,7 +3,7 @@
 
 ## Overview
 
-This laboratory uses an Ubuntu Linux virtual machine, Docker, a local Kubernetes cluster (kind), Helm, Python, and cloud-native security tools.
+This laboratory uses a Ubuntu Linux virtual machine, Docker, a local Kubernetes cluster (kind), Helm, Python, and cloud-native security tools.
 
 
 **Deployment scope:** 
