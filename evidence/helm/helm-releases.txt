@@ -1,0 +1,2 @@
+NAME             	NAMESPACE   	REVISION	UPDATED                                	STATUS  	CHART                  	APP VERSION
+cicd-security-lab	security-lab	3       	2026-11-12 12:50:21.378955473 +0100 CET	deployed	cicd-security-lab-0.1.0	1.16.0     
