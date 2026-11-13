@@ -125,6 +125,7 @@ Individual workload status must be reviewed because a running cluster does not g
 ```bash
 helm version
 helm list -A
+helm list --all-namespaces
 ```
 
 **Expected result:**
@@ -163,9 +164,9 @@ These links become available once the corresponding files have been created and 
 
 | Component | Validation | Result |
 |-----------|------------|--------|
-| Docker | Daemon accessible | Pending |
-| kind | Cluster exists | Pending |
-| Kubernetes | Nodes Ready | Pending |
+| Docker | Daemon accessible | PASS |
+| kind | Cluster exists | PASS |
+| Kubernetes | Nodes Ready | PASS |
 | Workloads | Expected pods healthy | Pending |
 | Helm | Releases accessible | Pending |
 
@@ -228,7 +229,10 @@ For Kubernetes workload issues, inspect the affected pod:
 
 ```bash
 kubectl describe pod <pod-name> -n <namespace>
+kubectl describe pod cicd-security-lab-8597f79977-dr7vp  -n security-lab 
+
 kubectl logs <pod-name> -n <namespace>
+kubectl logs cicd-security-lab-8597f79977-dr7vp -n security-lab
 ```
 
 Replace `<pod-name>` and `<namespace>` with the actual values.

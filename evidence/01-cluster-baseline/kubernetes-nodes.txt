@@ -1,2 +1,2 @@
 NAME                        STATUS   ROLES           AGE   VERSION   INTERNAL-IP   EXTERNAL-IP   OS-IMAGE                       KERNEL-VERSION             CONTAINER-RUNTIME
-laboratorio-control-plane   Ready    control-plane   97d   v1.36.1   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   7.0.0-42-generic (amd64)   containerd://2.3.1
+laboratorio-control-plane   Ready    control-plane   98d   v1.36.1   172.18.0.2    <none>        Debian GNU/Linux 13 (trixie)   7.0.0-43-generic (amd64)   containerd://2.3.1
