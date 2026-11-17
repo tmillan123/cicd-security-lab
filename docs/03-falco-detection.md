@@ -202,6 +202,170 @@ captured evidence.
 | Alert matches test workload | To verify |
 | Relevant event evidence captured | To verify |
 
+
+## Validation 01 — Interactive Shell Detection
+
+**Date:** 2026-11-17  
+**Environment:** Local Kubernetes cluster (kind)  
+**Security control:** Runtime detection of interactive shell execution  
+**Technology:** Falco 0.45.2, modern eBPF
+
+### Objective
+
+Validate that Falco detects interactive shell execution inside a running Kubernetes container and provides sufficient context for security investigation.
+
+### Test Procedure
+
+Execute an interactive shell in the Nginx pod:
+
+```bash
+kubectl exec -it nginx-demo-7cfb987f85-578dk -- /bin/sh
+```
+
+Verify the execution identity:
+
+```bash
+whoami
+id
+```
+
+Exit the container:
+
+```bash
+exit
+```
+
+### Observed Results
+
+- **Alerts generated:** 3 shell execution alerts
+- **Severity:** Notice
+- **Event type:** `execve`
+- **Process:** `sh` (`/usr/bin/dash`)
+- **User:** `root` (UID 0)
+- **Container:** `nginx`
+- **Kubernetes namespace:** `default`
+- **Kubernetes pod:** Correctly identified
+
+### Validation Result
+
+**PASS — Interactive shell detection validated.**
+
+Falco successfully detected interactive shell execution inside the Nginx container and provided relevant process, user, container, and Kubernetes context.
+
+### Evidence
+
+Raw Falco detection logs:
+
+`evidence/03-falco-detection/terminal-shell-detection-2026-11-17.log`
+
+### Limitations
+
+- Alerts were observed in local Falco logs only.
+- SIEM/XDR forwarding has not been validated.
+- Automated incident response has not been implemented.
+- This is a detection control, not a prevention control.
+- Testing was performed in a local kind environment rather than a production Kubernetes cluster.
+
+### Next Steps
+
+1. Validate detection of sensitive file access (`/etc/shadow`).
+2. Export Falco alerts in structured JSON format.
+3. Forward Falco alerts to a centralized monitoring platform.
+4. Document detection coverage and remaining security gaps.
+
+## Validation 02 — Sensitive File Access Detection
+
+**Date:** 2026-11-17  
+**Environment:** Local Kubernetes cluster (kind)  
+**Security control:** Runtime detection of sensitive file access  
+**Technology:** Falco 0.45.2, modern eBPF
+
+### Objective
+
+Validate that Falco detects unauthorized or suspicious access to sensitive files inside a Kubernetes container and captures sufficient context for security investigation.
+
+### Test Procedure
+
+Deploy a temporary Python container:
+
+```bash
+kubectl run falco-sensitive-test \
+  --image=python:3.12-slim \
+  --restart=Never \
+  --command -- sleep 3600
+```
+
+Verify the execution identity:
+
+```bash
+kubectl exec falco-sensitive-test -- id
+```
+
+Attempt to read `/etc/shadow`:
+
+```bash
+kubectl exec falco-sensitive-test -- \
+  python3 -c "with open('/etc/shadow') as f: print('Sensitive file opened successfully')"
+```
+
+Inspect Falco logs:
+
+```bash
+kubectl logs -n falco daemonset/falco -c falco \
+  --since=5m | grep -i 'Sensitive file opened'
+```
+
+### Observed Results
+
+- **Detection rule:** Read sensitive file untrusted
+- **Severity:** Warning
+- **Event type:** `openat`
+- **Sensitive file:** `/etc/shadow`
+- **Process:** `python3`
+- **Executable:** `/usr/local/bin/python3.12`
+- **User:** `root` (UID 0)
+- **Container:** `falco-sensitive-test`
+- **Container image:** `python:3.12-slim`
+- **Kubernetes namespace:** `default`
+- **Kubernetes pod:** `falco-sensitive-test`
+
+The sensitive file was successfully opened, and Falco generated a corresponding runtime security alert.
+
+### Validation Result
+
+**PASS — Sensitive file access detection validated.**
+
+Falco successfully identified access to `/etc/shadow` by a non-trusted process and provided process, user, container, and Kubernetes context.
+
+### Evidence
+
+`evidence/03-falco-detection/sensitive-file-access-2026-11-17.log`
+
+### Limitations
+
+- Testing performed in a local kind Kubernetes environment.
+- Detection validated using an existing Falco rule.
+- The test container executed as root.
+- The rule contains exclusions for known trusted processes.
+- SIEM/XDR forwarding has not been validated.
+- No automated incident response was implemented.
+- File access was detected but not prevented.
+
+### Security Architecture Implications
+
+This validation demonstrates runtime visibility into sensitive file access within Kubernetes workloads.
+
+Falco provides detection and investigation context but does not enforce filesystem access restrictions.
+
+A defense-in-depth approach should combine runtime detection with:
+
+- Least-privilege container execution.
+- Non-root security contexts.
+- Linux capabilities restrictions.
+- Read-only root filesystems where practical.
+- Kubernetes admission policies.
+- Centralized security monitoring and incident response.
+
 ### 7.2 Security interpretation
 
 Runtime threat detection complements preventive
