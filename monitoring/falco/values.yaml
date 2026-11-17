@@ -1,0 +1,37 @@
+driver:
+  kind: modern_ebpf
+tty: true
+
+# Falco runtime security and alert forwarding
+# Helm chart: falcosecurity/falco 9.2.2
+
+driver:
+  kind: modern_ebpf
+
+tty: true
+
+falcosidekick:
+  enabled: true
+
+  config:
+    loki:
+      hostport: "http://loki.monitoring.svc.cluster.local:3100"
+      endpoint: "/loki/api/v1/push"
+      format: "json"
+
+# Falco runtime security and alert forwarding
+# Helm chart: falcosecurity/falco 9.2.2
+
+driver:
+  kind: modern_ebpf
+
+tty: true
+
+falcosidekick:
+  enabled: true
+
+  config:
+    loki:
+      hostport: "http://loki.monitoring.svc.cluster.local:3100"
+      endpoint: "/loki/api/v1/push"
+      format: "json"
