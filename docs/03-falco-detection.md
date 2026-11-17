@@ -366,6 +366,65 @@ A defense-in-depth approach should combine runtime detection with:
 - Kubernetes admission policies.
 - Centralized security monitoring and incident response.
 
+## Validation 03 — Centralized Falco Alert Collection
+
+**Date:** 2026-11-17  
+**Environment:** Local Kubernetes cluster (kind)  
+**Security control:** Centralized runtime security alert collection  
+**Technologies:** Falco 0.45.2, Falcosidekick 2.35.1, Loki 3.7.10
+
+### Objective
+
+Validate end-to-end forwarding of Falco runtime security alerts to Loki through Falcosidekick.
+
+### Architecture
+
+Falco → Falcosidekick → Loki
+
+### Test Procedure
+
+1. Deploy Falcosidekick using Helm.
+2. Configure Falcosidekick with the Loki ingestion endpoint.
+3. Execute a controlled sensitive-file access test inside a Kubernetes container.
+4. Confirm the Falco detection.
+5. Query Loki using its HTTP API.
+6. Verify the returned alert and associated Kubernetes context.
+
+### Observed Results
+
+- Falcosidekick initialized with Loki output enabled.
+- A sensitive-file access event triggered the Falco rule `Read sensitive file untrusted`.
+- Loki successfully returned the corresponding alert.
+- Event severity: Warning.
+- Event type: `openat`.
+- Sensitive file: `/etc/shadow`.
+- Process: `python3`.
+- User: `root` (UID 0).
+- Kubernetes pod: `falco-sensitive-test`.
+- Kubernetes namespace: `default`.
+- MITRE ATT&CK tag: `T1555`.
+- Loki query returned one matching event.
+
+### Validation Result
+
+**PASS — End-to-end centralized alert forwarding validated.**
+
+A runtime security event detected by Falco was successfully forwarded through Falcosidekick and retrieved from Loki.
+
+### Evidence
+
+`evidence/05-centralized-monitoring/falco-loki-validation-2026-11-17.json`
+
+### Limitations
+
+- Testing performed in a local, single-node kind cluster.
+- Grafana visualization has not yet been validated.
+- No alert notification or automated response has been implemented.
+- Loki uses local persistent storage.
+- No high-availability or disaster-recovery testing has been performed.
+- This validation demonstrates detection and centralized collection, not prevention.
+
+
 ### 7.2 Security interpretation
 
 Runtime threat detection complements preventive

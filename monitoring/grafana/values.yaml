@@ -1,0 +1,44 @@
+# Grafana Security Investigation Dashboard
+# Chart: grafana-community/grafana 14.4.2
+
+replicas: 1
+
+service:
+  type: ClusterIP
+
+persistence:
+  enabled: true
+  type: pvc
+  storageClassName: standard
+  accessModes:
+    - ReadWriteOnce
+  size: 5Gi
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 256Mi
+  limits:
+    cpu: 500m
+    memory: 1Gi
+
+# Admin credentials managed by the Helm chart's
+# Kubernetes Secret. No passwords in Git.
+adminUser: admin
+
+# Provision Loki automatically as a data source.
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: Loki
+        uid: loki
+        type: loki
+        access: proxy
+        url: http://loki.monitoring.svc.cluster.local:3100
+        isDefault: true
+        editable: false
+
+# Grafana is accessed through localhost port-forwarding.
+ingress:
+  enabled: false
