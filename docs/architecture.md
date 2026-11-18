@@ -6,7 +6,7 @@ This laboratory implements a local Kubernetes environment for workload security 
 
 ## Architecture Diagram
 
-![Cloud-Native Workload Security Architecture](../evidence/Architecture-and-Flows.png)
+![Cloud-Native Workload Security Architecture](../docs/images/Architecture-and-Flows.png)
 
 ## Architecture Components
 - GitHub Actions for CI/CD automation
