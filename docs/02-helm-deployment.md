@@ -276,12 +276,12 @@ Record actual results after reviewing the evidence.
 
 | Validation criterion | Result |
 |---|---|
-| Helm CLI available | To verify |
-| Kubernetes cluster accessible | To verify |
-| Helm releases listed | To verify |
-| Release history captured | To verify |
-| Workload health validated | To verify |
-| Configuration file versioned | To verify |
+| Helm CLI available | PASS |
+| Kubernetes cluster accessible | PASS |
+| Helm releases listed | PASS |
+| Release history captured | PASS |
+| Workload health validated | PASS |
+| Configuration file versioned | PASS |
 | Upgrade tested | Not yet evidenced |
 | Rollback tested | Not yet evidenced |
 

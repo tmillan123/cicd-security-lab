@@ -51,7 +51,7 @@ Kubernetes Service (AKS).
 
 The laboratory architecture and component interactions are documented in the `docs` directory.
 
-![Architecture-and-flows](evidence/Architecture-and-Flows.png)
+![Architecture-and-flows](docs/images/Architecture-and-Flows.png)
 
 ## Security Validation Scenarios
 

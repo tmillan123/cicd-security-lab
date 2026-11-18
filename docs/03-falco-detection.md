@@ -195,12 +195,12 @@ captured evidence.
 
 | Validation criterion | Result |
 |---|---|
-| Falco deployment healthy | To verify |
-| Runtime monitoring operational | To verify |
-| Shell execution test performed | To verify |
-| Falco alert generated | To verify |
-| Alert matches test workload | To verify |
-| Relevant event evidence captured | To verify |
+| Falco deployment healthy | PASS |
+| Runtime monitoring operational | PASS |
+| Shell execution test performed | PASS |
+| Falco alert generated | PASS |
+| Alert matches test workload | PASS |
+| Relevant event evidence captured | PASS |
 
 
 ## Validation 01 — Interactive Shell Detection
@@ -412,7 +412,7 @@ Falco → Falcosidekick → Loki
 A runtime security event detected by Falco was successfully forwarded through Falcosidekick and retrieved from Loki.
 
 ### Evidence
-
+S
 `evidence/05-centralized-monitoring/falco-loki-validation-2026-11-17.json`
 
 ### Limitations
@@ -476,6 +476,9 @@ Captured logs should be preserved without
 unnecessary modification and reviewed for
 sensitive information before publication.
 
+### Detection validation
+A triggered Falco alert confirms that a specific rule detected the tested behaviour. It does not establish overall detection coverage, precision or effectiveness.
+
 ## 9. Limitations
 
 This laboratory demonstrates runtime security
@@ -497,15 +500,10 @@ development and additional validation.
 
 Potential enhancements include:
 
-1. Validate additional Falco detection rules.
-2. Test suspicious file access and process execution.
-3. Evaluate custom Falco rules.
-4. Forward Falco alerts to centralized monitoring.
-5. Visualize relevant events using Grafana.
-6. Automate repeatable runtime security tests.
-7. Map detection scenarios to MITRE ATT&CK
-   techniques where appropriate.
-
+1. Evaluate integration with Wazuh or another SIEM.
+2. Validate additional Falco rules and map selected detections to MITRE ATT&CK.
+3. Test suspicious file access and process execution.4. Evaluate custom Falco rules.
+5. Forward Falco alerts to centralized monitoring
 ## 11. Conclusion
 
 This laboratory provides a framework for testing

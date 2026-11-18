@@ -382,19 +382,12 @@ rather than completed validation results.
 
 ## 13. Conclusion
 
-This laboratory establishes a foundation for
-integrating automated validation into the
-software development lifecycle.
+This laboratory demonstrates the implementation and validation of runtime threat detection in a local Kubernetes environment using Falco.
 
-GitHub Actions provides a mechanism for
-executing repeatable checks and recording
-their outcomes.
+The successful detection of a shell spawned inside a container provides evidence that Falco can identify the specific runtime behaviour under test.
 
-The security value depends on the specific
-checks implemented, the quality of the tests,
-the permissions assigned to workflows, and
-the controls governing deployment.
+Reproducible test procedures, structured security events, and preserved detection logs support the validation of security controls and the investigation of suspicious workload activity.
 
-Further work can extend the existing
-automation into container security scanning,
-deployment validation, and GitOps.
+The laboratory also establishes a foundation for extending runtime detection into centralized log aggregation, visualization, alerting, and potentially SIEM/XDR integration.
+
+The results demonstrate detection capability for the tested scenarios, rather than comprehensive threat detection effectiveness or production readiness.

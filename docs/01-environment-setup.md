@@ -167,8 +167,8 @@ These links become available once the corresponding files have been created and 
 | Docker | Daemon accessible | PASS |
 | kind | Cluster exists | PASS |
 | Kubernetes | Nodes Ready | PASS |
-| Workloads | Expected pods healthy | Pending |
-| Helm | Releases accessible | Pending |
+| Workloads | Expected pods healthy | PASS |
+| Helm | Releases accessible | PASS |
 
 Update each result to `PASS` or `FAIL` after executing the corresponding validation commands.
 
